@@ -1,18 +1,4 @@
-.button-float{
-	position:fixed;
-	width:60px;
-	height:60px;
-	bottom:25px;
-	right:25px;
-	border-radius:50px;
-	text-align:center;
-	box-shadow: 2px 2px 3px #999;
-}
-
-.button-float-inner{
-	margin-top:22px;
-}
-
+/* LOGIN */
 .wrapper {
 	margin-top: 80px;
 	margin-bottom: 80px;
@@ -54,3 +40,27 @@
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
   }
+
+  /* APP */
+  .button-float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:25px;
+	right:25px;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
+
+.button-float-inner{
+	margin-top:22px;
+}
+
+.table .thead{
+	text-align: center;
+}
+
+.table tr td:nth-child(1), .table tr td:nth-child(2), .table tr td:nth-child(3), .table tr td:nth-child(4), .table tr td:nth-child(6), .table tr td:nth-child(8){
+	text-align: center;
+}
