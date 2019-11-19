@@ -1,3 +1,22 @@
+<?php 
+
+require_once("db.php");
+
+// GET activities
+$activities_query = $conn->query('SELECT `date`, `type`, `ticketNum`, `subtask`, `description`, `location`, `comment` FROM activities');
+$activities = $activities_query->fetchAll(PDO::FETCH_ASSOC);
+
+
+function debug_to_console($data) {
+    $output = $data;
+    if (is_array($output))
+        $output = implode(',', $output);
+
+    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -57,26 +76,60 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>08/11/2019</td>
-                                <td>Ticket</td>
-                                <td>154915</td>
-                                <td>Code review</td>
-                                <td>Duplicate record in Configurator with image in ref. item</td>
-                                <td>Annecy</td>
-                                <td>Pas encore de maintenance</td>
-                                <td>Actions</td>
-                            </tr>
-                            <tr>
-                                <td>08/11/2019</td>
-                                <td>Ticket</td>
-                                <td>160583</td>
-                                <td></td>
-                                <td>Duplicate subcontract operation line in WO status screen</td>
-                                <td>Annecy</td>
-                                <td>Dev non fini</td>
-                                <td>Actions</td>
-                            </tr>
+                            <?php 
+                            
+                            foreach ($activities as $activity) {
+
+                                $date = date_create($activity["date"]);
+                                switch ($activity["type"]) {
+                                    case '1':
+                                        $type = "Ticket";
+                                        break;
+                                    
+                                    case '2':
+                                        $type = "Formation";
+                                        break;
+                                }
+
+                                switch ($activity["subtask"]) {
+                                    case '1':
+                                        $subtask = "Dev Analysis";
+                                        break;
+                                    
+                                    case '2':
+                                        $subtask = "Development";
+                                        break;
+
+                                    case '3':
+                                        $subtask = "Unit Testing";
+                                        break;
+
+                                    case '4':
+                                        $subtask = "Dev Review";
+                                        break;
+                                    
+                                    case '5':
+                                        $subtask = "Pre-integration Merge";
+                                        break;
+                                    
+                                    case '6':
+                                        $subtask = "Integration Merge";
+                                        break;
+                                }
+
+                                echo "<tr>";
+                                echo "<td>".date_format($date, "Y/m/d")."</td>";
+                                echo "<td>".$type."</td>";
+                                echo "<td>".$activity["ticketNum"]."</td>";
+                                echo "<td>".$subtask."</td>";
+                                echo "<td>".$activity["description"]."</td>";
+                                echo "<td>".$activity["location"]."</td>";
+                                echo "<td>".$activity["comment"]."</td>";
+                                echo "<td>"."actions"."</td>";
+                                echo "</tr>";
+                            }
+                            
+                            ?>
                         </tbody>
                     </table>
                 </div>
