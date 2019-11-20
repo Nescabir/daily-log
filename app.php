@@ -3,7 +3,7 @@
 require_once("db.php");
 
 // GET activities
-$activities_query = $conn->query('SELECT `date`, `type`, `ticketNum`, `subtask`, `description`, `location`, `comment` FROM activities');
+$activities_query = $conn->query('SELECT `date`, `type`, `ticketNum`, `subtask`, `description`, `location`, `comment` FROM activities WHERE `userId` = "1"');
 $activities = $activities_query->fetchAll(PDO::FETCH_ASSOC);
 
 
@@ -45,7 +45,7 @@ function debug_to_console($data) {
                         <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Se déconnecter</a>
+                        <a class="nav-link isDisabled" href="#">Se déconnecter</a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
@@ -55,7 +55,7 @@ function debug_to_console($data) {
             </div>
         </nav>
 
-        <a href="#" class="button-float btn-dark">
+        <a href="./add.php" class="button-float btn-dark">
             <i class="fa fa-plus button-float-inner"></i>
         </a>
 
@@ -65,14 +65,14 @@ function debug_to_console($data) {
                     <table class="table table-striped table-hover table-bordered">
                         <thead class="thead-light">
                             <tr>
-                                <th>Date</th>
-                                <th>Type</th>
-                                <th>Ticket #</th>
-                                <th>Subtask</th>
+                                <th class="date">Date</th>
+                                <th class="type">Type</th>
+                                <th class="ticketNum">Ticket #</th>
+                                <th class="subtask">Subtask</th>
                                 <th>Description</th>
-                                <th>Location</th>
+                                <th class="location">Location</th>
                                 <th>Comment</th>
-                                <th>Actions</th>
+                                <th class="actions">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -120,12 +120,13 @@ function debug_to_console($data) {
                                 echo "<tr>";
                                 echo "<td>".date_format($date, "Y/m/d")."</td>";
                                 echo "<td>".$type."</td>";
-                                echo "<td>".$activity["ticketNum"]."</td>";
+                                echo "<td><a href='https://jira.sage.com/browse/X3-".$activity["ticketNum"]."' target='_blank'>".$activity["ticketNum"]."</a></td>";
                                 echo "<td>".$subtask."</td>";
                                 echo "<td>".$activity["description"]."</td>";
                                 echo "<td>".$activity["location"]."</td>";
                                 echo "<td>".$activity["comment"]."</td>";
-                                echo "<td>"."actions"."</td>";
+                                // DELETE to delete.php?id=$id et UPDATE to modify.php?id=$id
+                                echo "<td>"."<a href=".'#'."><i class='fas fa-trash'></i></a> <a><i class='fas fa-edit'></i></a>"."</td>";
                                 echo "</tr>";
                             }
                             

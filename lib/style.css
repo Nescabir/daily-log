@@ -57,10 +57,45 @@
 	margin-top:22px;
 }
 
-.table .thead{
+.table thead tr th{
 	text-align: center;
+}
+
+.table .date {
+	width: 110px;
+}
+
+.table .type{
+	width: 70px;
+}
+
+.table .ticketNum {
+	width: 85px;
+}
+
+.table .subtask {
+	width: 110px;
+}
+
+.table .location {
+	width: 90px;
+}
+
+.table .actions {
+	width: 135px;
 }
 
 .table tr td:nth-child(1), .table tr td:nth-child(2), .table tr td:nth-child(3), .table tr td:nth-child(4), .table tr td:nth-child(6), .table tr td:nth-child(8){
 	text-align: center;
+}
+
+.isDisabled {
+	color: rgba(255,255,255,.5);
+	cursor: not-allowed;
+	opacity: 0.5;
+	text-decoration: none;
+}
+
+.isDisabled:hover{
+	color: rgba(255,255,255,.5) !important;
 }
