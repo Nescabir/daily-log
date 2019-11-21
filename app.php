@@ -3,7 +3,7 @@
 require_once("db.php");
 
 // GET activities
-$activities_query = $conn->query('SELECT `id`,`date`, `type`, `ticketNum`, `subtask`, `description`, `location`, `comment` FROM activities WHERE `userId` = "1" ORDER BY `date`');
+$activities_query = $conn->query('SELECT `id`,`date`, `type`, `ticketNum`, `subtask`, `description`, `location`, `comment` FROM activities WHERE `userId` = "1" ORDER BY `date` DESC');
 $activities = $activities_query->fetchAll(PDO::FETCH_ASSOC);
 
 
