@@ -3,7 +3,7 @@
 require_once("db.php");
 
 // GET activities
-$activities_query = $conn->query('SELECT `date`, `type`, `ticketNum`, `subtask`, `description`, `location`, `comment` FROM activities WHERE `userId` = "1"');
+$activities_query = $conn->query('SELECT `id`,`date`, `type`, `ticketNum`, `subtask`, `description`, `location`, `comment` FROM activities WHERE `userId` = "1" ORDER BY `date`');
 $activities = $activities_query->fetchAll(PDO::FETCH_ASSOC);
 
 
@@ -125,8 +125,7 @@ function debug_to_console($data) {
                                 echo "<td>".$activity["description"]."</td>";
                                 echo "<td>".$activity["location"]."</td>";
                                 echo "<td>".$activity["comment"]."</td>";
-                                // DELETE to delete.php?id=$id et UPDATE to modify.php?id=$id
-                                echo "<td>"."<a href=".'#'."><i class='fas fa-trash'></i></a> <a><i class='fas fa-edit'></i></a>"."</td>";
+                                echo "<td>"."<a href=delete.php?id=".$activity["id"]."><i class='fas fa-trash'></i></a> <a href='modify.php?id=".$activity["id"]."'><i class='fas fa-edit'></i></a>"."</td>";
                                 echo "</tr>";
                             }
                             
